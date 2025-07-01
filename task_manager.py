@@ -1,3 +1,19 @@
+import json
+import os
+
+
+def load_tasks():
+    if not os.path.exists("tasks.json"):
+        return []
+    with open("tasks.json", "r") as f:
+        return json.load(f)
+
+
+def save_tasks(tasks):
+    with open("tasks.json", "w") as f:
+        json.dump(tasks, f, indent=4)
+
+
 def add_task(tasks):
     description = input("Enter task description: ")
     task_id = len(tasks) + 1
@@ -35,7 +51,7 @@ def delete_task(tasks):
 
 def main():
     tasks = load_tasks()
-    while true:
+    while True:
         print("\nOptions: add / List / update / delete / quit")
         choice = input("What do you want to do? ").strip().lower()
 
@@ -52,3 +68,7 @@ def main():
             break
         else:
             print("Invalid option.")
+
+
+if __name__ == "__main__":
+    main()
